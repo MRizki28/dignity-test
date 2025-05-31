@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+    app:
+        container_name: e-dignity
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: 'php artisan serve  --host=0.0.0.0'
+        volumes:
+        - .:/app
+        ports:
+        - 8888:8000
+        depends_on:
+        - database
+        - node
+
+    database:
+        container_name: e-dignity-database
+        image: mysql:8.0
+        volumes:
+            - dbdata:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}   
+        ports:
+            - 33061:3306
+
+    node:
+        container_name: e-dignity-node
+        image: node:20-alpine
+        volumes:
+        - .:/app
+        - ./node_modules:/app/node_modules
+        working_dir: /app
+        command: npm run dev
+        ports:
+        - 5173:5173
+volumes:
+    dbdata:
