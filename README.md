@@ -2,13 +2,6 @@
 
 A simple Laravel application for managing patient data with create and list functionality.
 
-## 📦 Requirements
-
-- PHP >= 8.
-- Composer
-- Node.js & NPM
-- MySQL or compatible database
-
 ## 🚀 Getting Started
 
 ### 🔧 1. Clone Repository
